@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 
 public class DocumentBenchmarking {
 
-	
 	public static void main(String [] args) {
 
 	    // Run each test more than once to get bigger numbers and less noise.
@@ -37,11 +36,48 @@ public class DocumentBenchmarking {
 		// TODO: Fill in the rest of this method so that it runs two loops
 		// and prints out timing results as described in the assignment 
 		// instructions and following the pseudocode below.
+		
+		System.out.print("Number of Characters");
+		System.out.print("\t");
+		System.out.print("Basic Time");
+		System.out.print("\t");
+		System.out.print("Efficient Time");
+		System.out.print("\n");
+		
 		for (int numToCheck = start; numToCheck < numSteps*increment + start; 
 				numToCheck += increment)
 		{
 			// numToCheck holds the number of characters that you should read from the 
-			// file to create both a BasicDocument and an EfficientDocument.  
+			// file to create both a BasicDocument and an EfficientDocument.
+			
+			System.out.print(numToCheck);
+			System.out.print("\t");
+			
+			String readFile = getStringFromFile(textfile, numToCheck);
+			long startTimeBasic = System.nanoTime();
+			for (int idx = 0; idx < trials; idx++) {
+				BasicDocument basicDocument = new BasicDocument(readFile);
+				double fleschScore = basicDocument.getFleschScore();
+			}
+			
+			long endTimeBasic = System.nanoTime();
+			double resultTimeBasic = (endTimeBasic - startTimeBasic) / 1000000000.0 / trials;
+			
+			System.out.print(resultTimeBasic);
+			System.out.print("\t");
+			
+			long startTimeEff = System.nanoTime();
+			for (int idx = 0; idx < trials; idx++) {
+				EfficientDocument effDocument = new EfficientDocument(readFile);
+				double fleschScore = effDocument.getFleschScore();
+			}
+			
+			long endTimeEff = System.nanoTime();
+			double resultTimeEff = (endTimeEff - startTimeEff) / 1000000000.0 / trials;
+			
+			System.out.print(resultTimeEff);
+			System.out.print("\n");
+			
 			
 			/* Each time through this loop you should:
 			 * 1. Print out numToCheck followed by a tab (\t) (NOT a newline)

@@ -160,7 +160,7 @@ public class TextProController {
 		if(!text.equals("")) {
 			
 			// create Document representation of  current text
-			document.Document_bak doc = launch.getDocument(text);
+			document.Document doc = launch.getDocument(text);
 			
 			fIndex = doc.getFleschScore();
 			

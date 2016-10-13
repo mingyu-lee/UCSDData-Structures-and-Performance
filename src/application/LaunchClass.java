@@ -11,7 +11,7 @@ public class LaunchClass {
 		super();
 	}
 	
-	public document.Document_bak getDocument(String text) {
+	public document.Document getDocument(String text) {
 		// Change this to BasicDocument(text) for week 1 only
 		return new document.EfficientDocument(text);
 	}
